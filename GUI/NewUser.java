@@ -81,20 +81,42 @@ public class NewUser extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g.create();
-        // Gradiente del borde
+        // Gradiente del fondo
         GradientPaint gradient = new GradientPaint(
-                0, 0, new Color(175, 64, 255), // #af40ff
-                getWidth(), getHeight(), new Color(0, 221, 235) // #00ddeb
+                0, 0, new Color(175, 64, 255),
+                getWidth(), getHeight(), new Color(0, 221, 235)
         );
         g2.setPaint(gradient);
-        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 12, 12);
-        // Fondo interno
-        g2.setColor(new Color(113, 105, 187)); // rgb(113, 105, 187)
-        g2.fillRoundRect(3, 3, getWidth() - 6, getHeight() - 6, 10, 10);
-        // Texto del botón
-        super.paintComponent(g);
+        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
         g2.dispose();
+    }
+
+    // Clase para panel con esquinas redondeadas
+    class RoundedPanel extends JPanel {
+        private int arcWidth;
+        private int arcHeight;
+        private Color backgroundColor;
+
+        public RoundedPanel(int width, int height, int arc, Color bgColor) {
+            super();
+            setPreferredSize(new Dimension(width, height));
+            arcWidth = arc;
+            arcHeight = arc;
+            backgroundColor = bgColor;
+            setOpaque(false);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(backgroundColor);
+            g2.fillRoundRect(0, 0, getWidth(), getHeight(), arcWidth, arcHeight);
+            g2.dispose();
+        }
     }
 
     // Método para probar el Login en un JFrame

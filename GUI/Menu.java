@@ -31,8 +31,8 @@ public class Menu extends JPanel {
         back.add(iconLabel, gbc);
 
         // Crear arreglo de botones con iconos
-        String[] nombres = {"Inicio", "Perfil", "Configuración", "Salir"};
-        String[] iconos = {"home.png", "user.png", "settings.png", "exit.png"};
+        String[] nombres = {"Venta", "Almacen", "Reportes", "Ajustes", "Salir"};
+        String[] iconos = {"home.png", "user.png", "settings.png", "Ajusttes.png", "exit.png"};
         botones = new Button[nombres.length];
 
         for (int i = 0; i < nombres.length; i++) {
@@ -58,15 +58,16 @@ public class Menu extends JPanel {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Demo Menu con Iconos");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
+        frame.setSize(1000, 800);
 
         // Panel de contenido para acompañar al menú
         JPanel contenido = new JPanel();
         contenido.setBackground(new Color(220, 220, 220));
+        
 
         // Añadir menú (1/5 del ancho) y contenido (4/5 del ancho)
         frame.setLayout(new BorderLayout());
-        frame.add(new Menu(800, 600), BorderLayout.WEST);
+        frame.add(new Menu(1000, 800), BorderLayout.WEST);
         frame.add(contenido, BorderLayout.CENTER);
 
         frame.setLocationRelativeTo(null);
