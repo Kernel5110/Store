@@ -66,23 +66,3 @@ public class Button extends JButton {
     }
 }
 
-class Main {
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Demo Botón con Icono");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 200);
-        frame.setLayout(new FlowLayout());
-
-        // Cargar icono
-        Icon homeIcon = new ImageIcon(new ImageIcon("home.png").getImage()
-                .getScaledInstance(24, 24, Image.SCALE_SMOOTH));
-
-        // Crear botones
-        Button btn1 = new Button("Con Icono", homeIcon);
-
-        // Añadir al frame
-        frame.add(btn1);
-            frame.setVisible(true);
-        
-    }
-}

@@ -33,14 +33,14 @@ public class Login extends JPanel {
 
         // Correo
         correoField = new JTextField("Correo Electronico", 20);
-        correoField.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        correoField.setFont(new Font("Arial", Font.BOLD, 20));
         gbc.gridx = 0;
         gbc.gridy = 1;
         back.add(correoField, gbc);
 
         // Contraseña
         contrasenaField = new JPasswordField("Contraseña", 20);
-        contrasenaField.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        contrasenaField.setFont(new Font("Arial", Font.BOLD, 20));
         gbc.gridx = 0;
         gbc.gridy = 2;
         back.add(contrasenaField, gbc);
