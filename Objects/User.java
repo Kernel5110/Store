@@ -23,31 +23,31 @@ public abstract class User {
     protected void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    protected String getNombre() {
+    public String getNombre() {
         return nombre;
     }
     protected void setApellidoMaterno(String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno;
     }
-    protected String getApellidoMaterno() {
+    public String getApellidoMaterno() {
         return apellidoMaterno;
     }
     protected void setApellidoPaterno(String apellidoPaterno) {
         this.apellidoPaterno = apellidoPaterno;
     }
-    protected String getApellidoPaterno() {
+    public String getApellidoPaterno() {
         return apellidoPaterno;
     }
     protected void setTelefono(int telefono) {
         this.telefono = telefono;
     }
-    protected int getTelefono() {
+    public  int getTelefono() {
         return telefono;
     }
     protected void setCorreo(String correo) {
         this.correo = correo;
     }
-    protected String getCorreo() {
+    public  String getCorreo() {
         return correo;
     }
     protected abstract int consultarStock();

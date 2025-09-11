@@ -1,9 +1,11 @@
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.*;
 
 public class NewUser extends JPanel {
     public JPanel back;
-    public JTextField correoField, nombreJField, apellidoPartenoField,
+    public JTextField correoField, nombreJField, apellidoPaternoField,
                       apellidoMaternoField;
     public JPasswordField passwordField;
     public JLabel loginJLabel;
@@ -31,36 +33,36 @@ public class NewUser extends JPanel {
         gbc.gridwidth = 2;
         back.add(loginJLabel, gbc);
 
-        //Nombre
+        // Nombre
         nombreJField = new JTextField("Nombre", 20);
         nombreJField.setFont(new Font("Times New Roman", Font.BOLD, 20));
         gbc.gridx = 0;
         gbc.gridy = 1;
         back.add(nombreJField, gbc);
 
-        //apellido Paterno
-        apellidoPartenoField = new JTextField("Apellido Paterno", 20);
-        apellidoPartenoField.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        // Apellido Paterno
+        apellidoPaternoField = new JTextField("Apellido Paterno", 20);
+        apellidoPaternoField.setFont(new Font("Times New Roman", Font.BOLD, 20));
         gbc.gridx = 0;
         gbc.gridy = 2;
-        back.add(apellidoPartenoField, gbc);
+        back.add(apellidoPaternoField, gbc);
 
-        // apellido Materno
-        correoField = new JTextField("Apellido Materno", 20);
-        correoField.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        // Apellido Materno (Corregido)
+        apellidoMaternoField = new JTextField("Apellido Materno", 20);
+        apellidoMaternoField.setFont(new Font("Times New Roman", Font.BOLD, 20));
         gbc.gridx = 0;
         gbc.gridy = 3;
-        back.add(correoField, gbc);
+        back.add(apellidoMaternoField, gbc);
 
-        //correo
+        // Correo
         correoField = new JTextField("Correo Electronico", 20);
         correoField.setFont(new Font("Times New Roman", Font.BOLD, 20));
         gbc.gridx = 0;
         gbc.gridy = 5;
         back.add(correoField, gbc);
 
-        //contrasena
-        passwordField = new JPasswordField("Contresena", 20);
+        // Contrasena
+        passwordField = new JPasswordField("Contrasena", 20);
         passwordField.setFont(new Font("Times New Roman", Font.BOLD, 20));
         gbc.gridx = 0;
         gbc.gridy = 6;
@@ -76,8 +78,46 @@ public class NewUser extends JPanel {
         // Añadir al panel principal
         setLayout(new GridBagLayout());
         add(back);
+        
+        // Agregar los FocusListeners
+        addFocusListeners();
     }
+    
+    // Método para agregar los FocusListeners a todos los campos
+    private void addFocusListeners() {
+        // Campos de texto
+        JTextField[] textFields = {
+            nombreJField, apellidoPaternoField, apellidoMaternoField, correoField
+        };
 
+        for (JTextField field : textFields) {
+            field.addFocusListener(new FocusListener() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    field.setText("");
+                }
+
+                @Override
+                public void focusLost(FocusEvent e) {
+                    // No hacer nada
+                }
+            });
+        }
+
+        // Campo de contraseña
+        passwordField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                // Para JPasswordField, use setText para borrar el texto
+                passwordField.setText("");
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                // No hacer nada
+            }
+        });
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
