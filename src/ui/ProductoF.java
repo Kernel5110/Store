@@ -62,7 +62,6 @@ public void listarProductos() {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnCerrar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -89,19 +88,12 @@ public void listarProductos() {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Producto");
 
-        btnCerrar.setText("Cerrar");
-        btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCerrarMouseClicked(evt);
-            }
-        });
-        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarActionPerformed(evt);
-            }
-        });
-
         btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,9 +104,7 @@ public void listarProductos() {
                 .addComponent(btnVolver)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(167, 167, 167)
-                .addComponent(btnCerrar)
-                .addContainerGap())
+                .addGap(245, 245, 245))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,8 +112,7 @@ public void listarProductos() {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(btnVolver)
-                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnVolver))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -299,14 +288,6 @@ public void listarProductos() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseClicked
-        System.exit(0);// TODO add your handling code here:
-    }//GEN-LAST:event_btnCerrarMouseClicked
-
-    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_btnCerrarActionPerformed
-
     private void TablaproductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaproductoMouseClicked
 
        
@@ -333,6 +314,14 @@ public void listarProductos() {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombrePActionPerformed
 
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+MenuAdmin menu = new MenuAdmin();
+menu.setVisible(true);
+
+
+this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -350,7 +339,6 @@ public void listarProductos() {
     public javax.swing.JTable Tablaproducto;
     public javax.swing.JButton btnActualizarp;
     public javax.swing.JButton btnAgregarp;
-    private javax.swing.JButton btnCerrar;
     public javax.swing.JButton btnEliminarp;
     public javax.swing.JButton btnModificarp;
     private javax.swing.JButton btnVolver;

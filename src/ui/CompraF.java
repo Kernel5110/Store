@@ -133,6 +133,8 @@ public class CompraF extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblCarrito.getModel();
         model.setRowCount(0);
     }
+    
+    
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
@@ -368,6 +370,8 @@ public class CompraF extends javax.swing.JFrame {
 
         pack();
     }
+    
+    
 
     // Variables declaration
     private javax.swing.JButton btnAgregar;
