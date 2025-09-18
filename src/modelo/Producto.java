@@ -16,6 +16,20 @@ public class Producto {
     private double precio;
     private String tipo; // "perecedero" o "no_perecedero"
 
+
+    public Producto() {
+    }
+    public Producto(String nombre, String tipo, double precio){
+        this.nombre=nombre;
+        this.tipo=tipo;
+        this.precio=precio;
+    }
+    public Producto(int id, String nombre, String tipo, double precio){
+        this.idProducto=id;
+        this.nombre=nombre;
+        this.tipo=tipo;
+        this.precio=precio;
+    }
     // Getters y setters
     public int getIdProducto() {
         return idProducto;
@@ -50,10 +64,6 @@ public class Producto {
     }
 
     public String getStockTotal() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Object getId_producto() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

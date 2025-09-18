@@ -91,7 +91,7 @@ public class CompraF extends javax.swing.JFrame {
                     return;
                 }
             }
-            model.addRow(new Object[]{p.getNombre(), p.getPrecio(), 1, p.getId_producto()});
+            model.addRow(new Object[]{p.getNombre(), p.getPrecio(), 1, p.getIdProducto()});
         }
     }
 
@@ -115,7 +115,7 @@ public class CompraF extends javax.swing.JFrame {
             int cantidad = Integer.parseInt(tblCarrito.getValueAt(i, 2).toString());
             Producto p = productoDao.buscarPorNombre(nombre);
             if (p != null) {
-                detalles.add(new CompraProducto(0, (int) p.getId_producto(), cantidad));
+                detalles.add(new CompraProducto(0, (int) p.getIdProducto(), cantidad));
             }
         }
 
