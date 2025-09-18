@@ -51,7 +51,6 @@ public class usuario extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnCerrar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -79,19 +78,12 @@ public class usuario extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Usuarios");
 
-        btnCerrar.setText("Cerrar");
-        btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCerrarMouseClicked(evt);
-            }
-        });
-        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarActionPerformed(evt);
-            }
-        });
-
         btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -102,9 +94,7 @@ public class usuario extends javax.swing.JFrame {
                 .addComponent(btnVolver)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(167, 167, 167)
-                .addComponent(btnCerrar)
-                .addContainerGap())
+                .addGap(245, 245, 245))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,8 +102,7 @@ public class usuario extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(btnVolver)
-                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnVolver))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -378,17 +367,18 @@ public class usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TablaUsuarioMouseClicked
 
-    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-       System.exit(0);
-    }//GEN-LAST:event_btnCerrarActionPerformed
-
-    private void btnCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseClicked
-         System.exit(0);// TODO add your handling code here:
-    }//GEN-LAST:event_btnCerrarMouseClicked
-
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
       listarUsuarios() ;  // TODO add your handling code here:
     }//GEN-LAST:event_btnListarActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+       
+MenuAdmin menu = new MenuAdmin();
+menu.setVisible(true);
+
+
+this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
 public void limpiarCampos() {
     txtidusuario.setText("");
     txtnombreu.setText("");
@@ -432,7 +422,6 @@ public void limpiarCampos() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable TablaUsuario;
     public javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnCerrar;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnListar;
     public javax.swing.JButton btnModificar;

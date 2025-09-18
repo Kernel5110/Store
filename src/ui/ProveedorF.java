@@ -326,11 +326,19 @@ public class ProveedorF extends javax.swing.JFrame {
     }// </editor-fold>
 
     private void btnCerrarMouseClicked(java.awt.event.MouseEvent evt) {
-        dispose(); // Mejor que System.exit(0)
+        MenuAdmin menu = new MenuAdmin();
+menu.setVisible(true);
+
+
+this.dispose();
     }
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {
-        dispose(); // Mejor que System.exit(0)
+        MenuAdmin menu = new MenuAdmin();
+menu.setVisible(true);
+
+
+this.dispose();
     }
 
     private void TablaProveedorMouseClicked(java.awt.event.MouseEvent evt) {
