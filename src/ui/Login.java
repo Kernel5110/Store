@@ -1,4 +1,4 @@
-package ui;
+ package ui;
 
 import dao.UsuarioDAO; // Importar la clase DAO
 import modelo.Usuario; // Importar el modelo Usuario

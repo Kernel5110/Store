@@ -8,6 +8,17 @@ package modelo;
  *
  * @author lore0
  */
-public class Perecedero {
-    
+public class Perecedero extends Producto{
+    private String expirationDate;
+
+    public Perecedero(String nombre, String tipo, double precio, String expirationDate) {
+        super(nombre, tipo, precio);
+        this.expirationDate = expirationDate;
+    }
+    public void setCaducidad(String expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+    public String getCaducidad() {
+        return expirationDate;
+    }
 }
