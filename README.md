@@ -115,3 +115,4 @@ CREATE TABLE `venta_producto` (
   KEY `producto_id` (`producto_id`)
 );
 ```
+![Diagrama de clases UML](https://github.com/user-attachments/assets/6f1ef586-55f8-487b-863c-f4a1321067f6)
