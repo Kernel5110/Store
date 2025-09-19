@@ -1,9 +1,12 @@
 package ui;
 
 import dao.ProveedorDAO;
+import java.math.BigDecimal;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Proveedor;
+import controlador.ControladorProveedor;
 
 /**
  *
@@ -12,7 +15,7 @@ import modelo.Proveedor;
 public class ProveedorF extends javax.swing.JFrame {
 
     private ProveedorDAO dao; // <-- Atributo único para evitar recrear DAO
-
+    private ControladorProveedor con;
     /**
      * Creates new form ProveedorF
      */
@@ -20,6 +23,7 @@ public class ProveedorF extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.dao = new ProveedorDAO(); // Inicializa el DAO una sola vez
+        this.con=new ControladorProveedor(this);
         listarProveedores();
     }
 
@@ -110,6 +114,12 @@ public class ProveedorF extends javax.swing.JFrame {
         });
 
         btnVolver.setText("Volver");
+        // ✅ AGREGADO: ActionListener para el botón Volver
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -235,12 +245,32 @@ public class ProveedorF extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Acciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         btnAgregarP.setText("Agregar");
+        btnAgregarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                con.agregarProveedor();
+            }
+        });
 
         btnModificarP.setText("Modificar");
+        btnModificarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                con.modificarProveedor();
+            }
+        });
 
         btnEliminarP.setText("Eliminar");
+        btnEliminarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                con.eliminarProveedor();
+            }
+        });
 
         btnActualizarP.setText("Actualizar");
+        btnActualizarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listarProveedores();
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -297,29 +327,20 @@ public class ProveedorF extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
+        // ✅ CORREGIDO: Layout principal sin gaps innecesarios
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, 0)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -327,18 +348,21 @@ public class ProveedorF extends javax.swing.JFrame {
 
     private void btnCerrarMouseClicked(java.awt.event.MouseEvent evt) {
         MenuAdmin menu = new MenuAdmin();
-menu.setVisible(true);
-
-
-this.dispose();
+        menu.setVisible(true);
+        this.dispose();
     }
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {
         MenuAdmin menu = new MenuAdmin();
-menu.setVisible(true);
+        menu.setVisible(true);
+        this.dispose();
+    }
 
-
-this.dispose();
+    // ✅ AGREGADO: Método para el botón Volver
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {
+        MenuAdmin menu = new MenuAdmin();
+        menu.setVisible(true);
+        this.dispose();
     }
 
     private void TablaProveedorMouseClicked(java.awt.event.MouseEvent evt) {

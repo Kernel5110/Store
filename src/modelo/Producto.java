@@ -15,9 +15,16 @@ public class Producto {
     private String nombre;
     private double precio;
     private String tipo; // "perecedero" o "no_perecedero"
-
+    private int stock;
 
     public Producto() {
+    }
+    public Producto(int idProducto, String nombre, double precio, String tipo, int stock ) {
+        this.idProducto = idProducto;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.tipo = tipo;
+        this.stock = stock;
     }
     public Producto(String nombre, String tipo, double precio){
         this.nombre=nombre;
@@ -63,8 +70,13 @@ public class Producto {
         this.tipo = tipo;
     }
 
-    public String getStockTotal() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int getStock() {
+        return stock;
     }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
 }
 

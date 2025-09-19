@@ -25,22 +25,15 @@ public class ControladorAlmacen implements ActionListener {
         // Cargar tabla inicial
         this.vista.listarAlmacenes();
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == vista.btnAgregarA) {
-            agregarAlmacen();
-        } else if (e.getSource() == vista.btnModificarA) {
-            modificarAlmacen();
-        } else if (e.getSource() == vista.btnEliminarA) {
-            eliminarAlmacen();
-        } else if (e.getSource() == vista.btnActualizarA) {
-            vista.listarAlmacenes();
-            vista.limpiarCampos();
-        }
+        
     }
-
-    private void agregarAlmacen() {
+    public void setVista(AlmacenF vista){
+        this.vista = vista;
+    }
+    public void agregarAlmacen() {
         try {
             String nombre = vista.txtNombreA.getText().trim();
             String ubicacion = vista.txtUbicacionA.getText().trim();
@@ -87,11 +80,12 @@ public class ControladorAlmacen implements ActionListener {
         }
     }
 
-    private void modificarAlmacen() {
+    public void modificarAlmacen() {
         try {
             // Validar que se haya seleccionado un almacén
             if (vista.txtIdAlmacen.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(vista, "Seleccione un almacén de la tabla para modificar");
+                System.out.println("aquitoy");
                 return;
             }
 
@@ -137,7 +131,7 @@ public class ControladorAlmacen implements ActionListener {
         }
     }
 
-    private void eliminarAlmacen() {
+    public void eliminarAlmacen() {
         try {
             // Validar que se haya seleccionado un almacén
             if (vista.txtIdAlmacen.getText().trim().isEmpty()) {

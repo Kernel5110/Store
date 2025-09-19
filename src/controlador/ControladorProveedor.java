@@ -45,7 +45,7 @@ public class ControladorProveedor implements ActionListener {
         }
     }
 
-    private void agregarProveedor() {
+    public void agregarProveedor() {
         Proveedor p = obtenerProveedorDesdeVista();
         if (p == null) return;
 
@@ -63,7 +63,7 @@ public class ControladorProveedor implements ActionListener {
         }
     }
 
-    private void modificarProveedor() {
+    public void modificarProveedor() {
         if (vista.txtIdProveedor.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(vista, "Seleccione un proveedor de la tabla para modificar");
             return;
@@ -88,7 +88,7 @@ public class ControladorProveedor implements ActionListener {
         }
     }
 
-    private void eliminarProveedor() {
+    public void eliminarProveedor() {
         if (vista.txtIdProveedor.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(vista, "Seleccione un proveedor de la tabla para eliminar");
             return;

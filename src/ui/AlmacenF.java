@@ -4,6 +4,7 @@
  */
 package ui;
 
+import controlador.ControladorAlmacen;
 import dao.AlmacenDAO;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -18,10 +19,15 @@ public class AlmacenF extends javax.swing.JFrame {
     /**
      * Creates new form Almacen
      */
+    public ControladorAlmacen cont;
     public AlmacenF() {
         initComponents();
         this.setLocationRelativeTo(null); 
         listarAlmacenes();
+        cont=new ControladorAlmacen(this);
+    }
+    public AlmacenF getVista(){
+        return this;
     }
 
     public void listarAlmacenes() {
@@ -183,12 +189,35 @@ public class AlmacenF extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Acciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         btnAgregarA.setText("Agregar");
+        btnAgregarA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cont.agregarAlmacen();
+            }
+        });
 
         btnModificarA.setText("Modificar");
+        btnModificarA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                System.out.println("oeoeo");
+                cont.modificarAlmacen();
+            }
+        });
 
         btnEliminarA.setText("Eliminar");
+        btnEliminarA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cont.eliminarAlmacen();
+            }
+        });
+
 
         btnActualizarA.setText("Actualizar");
+        btnActualizarA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listarAlmacenes();
+            }
+        });
+
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
