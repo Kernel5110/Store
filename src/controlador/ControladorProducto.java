@@ -40,6 +40,7 @@ public class ControladorProducto implements ActionListener {
     }
 
   private void agregarProducto() {
+      System.out.println("mirame");
     try {
         String nombre = vista.txtNombreP.getText().trim();
         String tipo = vista.txtTipop.getText().trim();

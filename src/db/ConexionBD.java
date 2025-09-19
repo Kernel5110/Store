@@ -9,7 +9,7 @@ public class ConexionBD {
     // Define los datos de tu conexión
     private static final String URL = "jdbc:mysql://localhost:3306/miselanea?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC";
     private static final String USER = "root"; // <-- Cambia a tu usuario de MySQL
-    private static final String PASSWORD = ""; // <-- Cambia a tu contraseña
+    private static final String PASSWORD = "123456"; // <-- Cambia a tu contraseña
 
     // Método estático para obtener la conexión
     public static Connection getConexion() {

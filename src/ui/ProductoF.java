@@ -6,6 +6,7 @@ package ui;
 
 import dao.ProductoDAO;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Producto;
 
@@ -18,11 +19,12 @@ public class ProductoF extends javax.swing.JFrame {
     /**
      * Creates new form Producto
      */
+    public ProductoDAO dao;
     public ProductoF() {
         initComponents();
          this.setLocationRelativeTo(null); 
         listarProductos();
-        
+        this.dao = new ProductoDAO();
     }
 
 public void listarProductos() {
@@ -198,10 +200,25 @@ public void listarProductos() {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Acciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         btnAgregarp.setText("Agregar");
+        btnAgregarp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarpActionPerformed(evt);
+            }
+        });
 
         btnModificarp.setText("Modificar");
+        btnModificarp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModificarpMouseClicked(evt);
+            }
+        });
 
         btnEliminarp.setText("Eliminar");
+        btnEliminarp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarpMouseClicked(evt);
+            }
+        });
 
         btnActualizarp.setText("Actualizar");
 
@@ -321,6 +338,96 @@ menu.setVisible(true);
 
 this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnAgregarpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarpActionPerformed
+        // TODO add your handling code here:
+        System.out.println("aqui toy");
+        try {
+        String nombre = txtNombreP.getText().trim();
+        String tipo = txtTipop.getText().trim();
+        String precioStr = txtPreciop.getText().trim();
+
+        // Validar campos
+        if (nombre.isEmpty() || tipo.isEmpty() || precioStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Complete todos los campos");
+            return;
+        }
+
+        // Validar precio
+        double precio;
+        try {
+            precio = Double.parseDouble(precioStr);
+            if (precio <= 0) {
+                JOptionPane.showMessageDialog(this, "El precio debe ser mayor que 0");
+                return;
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Ingrese un precio válido");
+            return;
+        }
+
+        // Validar tipo
+        if (!tipo.equals("perecedero") && !tipo.equals("no_perecedero")) {
+            JOptionPane.showMessageDialog(this, "El tipo debe ser 'perecedero' o 'no_perecedero'");
+            return;
+        }
+
+        // Crear objeto Producto
+        Producto p = new Producto();
+        p.setNombre(nombre);
+        p.setPrecio(precio);
+        p.setTipo(tipo);
+        
+        // Insertar
+        if (dao.insertarProducto(p)) {
+            JOptionPane.showMessageDialog(this, "Producto agregado correctamente");
+            listarProductos();
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al agregar producto");
+        }
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_btnAgregarpActionPerformed
+
+    private void btnModificarpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarpMouseClicked
+        // TODO add your handling code here:
+        try {
+            Producto p = new Producto();
+            p.setIdProducto(Integer.parseInt(txtidproducto.getText()));
+            p.setNombre(txtNombreP.getText());
+            p.setPrecio(Double.parseDouble(txtPreciop.getText()));
+            p.setTipo(txtTipop.getText());
+
+            if (dao.actualizarProducto(p)) {
+                JOptionPane.showMessageDialog(this, "Producto modificado correctamente");
+                listarProductos();
+                limpiarCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al modificar producto");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnModificarpMouseClicked
+
+    private void btnEliminarpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarpMouseClicked
+        // TODO add your handling code here:
+        try {
+            int id = Integer.parseInt(txtidproducto.getText());
+            if (dao.eliminarProducto(id)) {
+                JOptionPane.showMessageDialog(this, "Producto eliminado correctamente");
+                listarProductos();
+                limpiarCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al eliminar producto");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnEliminarpMouseClicked
 
     
     /**

@@ -10,7 +10,7 @@ public class MenuAdmin extends JFrame {
 
     public MenuAdmin() {
         setTitle("Panel de Administración");
-        setSize(600, 400);
+        setSize(700, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Centrar en la pantalla
 
@@ -27,11 +27,27 @@ public class MenuAdmin extends JFrame {
         // Puedes agregar más botones aquí si es necesario
 
         // --- Asignar acciones a cada botón ---
-        btnGestionarUsuarios.addActionListener(e -> new usuario().setVisible(true)); // Asumiendo que 'usuario' es un JFrame
-        btnGestionarProductos.addActionListener(e -> new ProductoF().setVisible(true));
-        btnGestionarProveedores.addActionListener(e -> new ProveedorF().setVisible(true));
-        btnGestionarAlmacen.addActionListener(e -> new AlmacenF().setVisible(true));
-        btnGestionarCompras.addActionListener(e -> new CompraF().setVisible(true));
+        btnGestionarUsuarios.addActionListener(e -> {
+                new usuario().setVisible(true);
+                dispose();}
+                 ); // Asumiendo que 'usuario' es un JFrame
+        btnGestionarProductos.addActionListener(e ->{
+            new ProductoF().setVisible(true);
+                dispose();
+                });
+        btnGestionarProveedores.addActionListener(e -> { 
+            new ProveedorF().setVisible(true);
+                dispose();
+                }
+        );
+        btnGestionarAlmacen.addActionListener(e -> {
+            new AlmacenF().setVisible(true);
+            dispose();
+                });
+        btnGestionarCompras.addActionListener(e -> {
+            new CompraF().setVisible(true);
+            dispose();
+                });
 
         // --- Añadir botones al panel ---
         panel.add(btnGestionarUsuarios);
