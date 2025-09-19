@@ -19,11 +19,12 @@ A esto se suma la falta de control de proveedores. Sin un registro adecuado de l
 # Código BDD
 
 ```sql
---Creación de la bdd
-CREATE DATABASE IF NOT EXISTS miselanea;
-USE miselanea;
+CREATE DATABASE IF NOT EXISTS `miselanea`;
+USE `miselanea`;
 
--- Creación de tablas
+
+-- Table structure for table `usuario`
+DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `id_usuario` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
@@ -33,13 +34,28 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`id_usuario`)
 );
 
+-- Table structure for table `administrador`
+DROP TABLE IF EXISTS `administrador`;
 CREATE TABLE `administrador` (
   `id_administrador` int NOT NULL AUTO_INCREMENT,
   `usuario_id` int NOT NULL,
   PRIMARY KEY (`id_administrador`),
-  KEY `usuario_id` (`usuario_id`)
+  KEY `usuario_id` (`usuario_id`),
+  CONSTRAINT `administrador_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE
 );
 
+-- Table structure for table `vendedor`
+DROP TABLE IF EXISTS `vendedor`;
+CREATE TABLE `vendedor` (
+  `id_vendedor` int NOT NULL AUTO_INCREMENT,
+  `usuario_id` int NOT NULL,
+  PRIMARY KEY (`id_vendedor`),
+  KEY `usuario_id` (`usuario_id`),
+  CONSTRAINT `vendedor_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE
+);
+
+-- Table structure for table `almacen`
+DROP TABLE IF EXISTS `almacen`;
 CREATE TABLE `almacen` (
   `id_almacen` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
@@ -47,6 +63,42 @@ CREATE TABLE `almacen` (
   PRIMARY KEY (`id_almacen`)
 );
 
+-- Table structure for table `producto`
+DROP TABLE IF EXISTS `producto`;
+CREATE TABLE `producto` (
+  `id_producto` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `precio` decimal(10,2) NOT NULL,
+  `tipo` varchar(20) NOT NULL DEFAULT 'General',
+  `fecha_caducidad` date DEFAULT NULL,
+  `fecha_compra` date DEFAULT NULL,
+  PRIMARY KEY (`id_producto`)
+);
+
+-- Table structure for table `perecedero`
+DROP TABLE IF EXISTS `perecedero`;
+CREATE TABLE `perecedero` (
+  `id_perecedero` int NOT NULL AUTO_INCREMENT,
+  `fecha_caducidad` date NOT NULL,
+  `producto_id` int NOT NULL,
+  PRIMARY KEY (`id_perecedero`),
+  KEY `producto_id` (`producto_id`),
+  CONSTRAINT `perecedero_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE
+);
+
+-- Table structure for table `noperecedero`
+DROP TABLE IF EXISTS `noperecedero`;
+CREATE TABLE `noperecedero` (
+  `id_no_perecedero` int NOT NULL AUTO_INCREMENT,
+  `fecha_compra` date NOT NULL,
+  `producto_id` int NOT NULL,
+  PRIMARY KEY (`id_no_perecedero`),
+  KEY `producto_id` (`producto_id`),
+  CONSTRAINT `noperecedero_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE
+);
+
+-- Table structure for table `proveedor`
+DROP TABLE IF EXISTS `proveedor`;
 CREATE TABLE `proveedor` (
   `id_proveedor` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
@@ -58,68 +110,64 @@ CREATE TABLE `proveedor` (
   PRIMARY KEY (`id_proveedor`)
 );
 
+-- Table structure for table `compra`
+DROP TABLE IF EXISTS `compra`;
 CREATE TABLE `compra` (
   `id_compra` int NOT NULL AUTO_INCREMENT,
   `proveedor_id` int NOT NULL,
   `fecha` date NOT NULL DEFAULT (curdate()),
   PRIMARY KEY (`id_compra`),
-  KEY `proveedor_id` (`proveedor_id`)
+  KEY `proveedor_id` (`proveedor_id`),
+  CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`proveedor_id`) REFERENCES `proveedor` (`id_proveedor`) ON DELETE CASCADE
 );
 
-CREATE TABLE `producto` (
-  `id_producto` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) NOT NULL,
-  `precio` decimal(10,2) NOT NULL,
-  `tipo` varchar(20) NOT NULL DEFAULT 'General',
-  `fecha_caducidad` date DEFAULT NULL,
-  `fecha_compra` date DEFAULT NULL,
-  PRIMARY KEY (`id_producto`)
-);
-
+-- Table structure for table `compra_producto`
+DROP TABLE IF EXISTS `compra_producto`;
 CREATE TABLE `compra_producto` (
   `compra_id` int NOT NULL,
   `producto_id` int NOT NULL,
   `cantidad` int NOT NULL,
   PRIMARY KEY (`compra_id`,`producto_id`),
-  KEY `producto_id` (`producto_id`)
+  KEY `producto_id` (`producto_id`),
+  CONSTRAINT `compra_producto_ibfk_1` FOREIGN KEY (`compra_id`) REFERENCES `compra` (`id_compra`) ON DELETE CASCADE,
+  CONSTRAINT `compra_producto_ibfk_2` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE
 );
 
-CREATE TABLE `noperecedero` (
-  `id_no_perecedero` int NOT NULL AUTO_INCREMENT,
-  `fecha_compra` date NOT NULL,
-  `producto_id` int NOT NULL,
-  PRIMARY KEY (`id_no_perecedero`),
-  KEY `producto_id` (`producto_id`)
-);
-
-CREATE TABLE `perecedero` (
-  `id_perecedero` int NOT NULL AUTO_INCREMENT,
-  `fecha_caducidad` date NOT NULL,
-  `producto_id` int NOT NULL,
-  PRIMARY KEY (`id_perecedero`),
-  KEY `producto_id` (`producto_id`)
-);
-
-CREATE TABLE `vendedor` (
-  `id_vendedor` int NOT NULL AUTO_INCREMENT,
-  `usuario_id` int NOT NULL,
-  PRIMARY KEY (`id_vendedor`),
-  KEY `usuario_id` (`usuario_id`)
-);
-
+-- Table structure for table `venta`
+DROP TABLE IF EXISTS `venta`;
 CREATE TABLE `venta` (
   `id_venta` int NOT NULL AUTO_INCREMENT,
   `fecha` date NOT NULL DEFAULT (curdate()),
   `vendedor_id` int NOT NULL,
   PRIMARY KEY (`id_venta`),
-  KEY `vendedor_id` (`vendedor_id`)
+  KEY `vendedor_id` (`vendedor_id`),
+  CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`vendedor_id`) REFERENCES `vendedor` (`id_vendedor`) ON DELETE CASCADE
 );
 
+-- Table structure for table `venta_producto`
+DROP TABLE IF EXISTS `venta_producto`;
 CREATE TABLE `venta_producto` (
   `venta_id` int NOT NULL,
   `producto_id` int NOT NULL,
   `cantidad` int NOT NULL,
   PRIMARY KEY (`venta_id`,`producto_id`),
-  KEY `producto_id` (`producto_id`)
+  KEY `producto_id` (`producto_id`),
+  CONSTRAINT `venta_producto_ibfk_1` FOREIGN KEY (`venta_id`) REFERENCES `venta` (`id_venta`) ON DELETE CASCADE,
+  CONSTRAINT `venta_producto_ibfk_2` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE
+);
+
+-- Table structure for table `inventario`
+DROP TABLE IF EXISTS `inventario`;
+CREATE TABLE `inventario` (
+  `id_inventario` int NOT NULL AUTO_INCREMENT,
+  `producto_id` int NOT NULL,
+  `almacen_id` int NOT NULL,
+  `cantidad_actual` int DEFAULT '0',
+  PRIMARY KEY (`id_inventario`),
+  UNIQUE KEY `unique_producto_almacen` (`producto_id`,`almacen_id`),
+  KEY `almacen_id` (`almacen_id`),
+  CONSTRAINT `inventario_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE,
+  CONSTRAINT `inventario_ibfk_2` FOREIGN KEY (`almacen_id`) REFERENCES `almacen` (`id_almacen`) ON DELETE CASCADE,
+  CONSTRAINT `inventario_chk_1` CHECK ((`cantidad_actual` >= 0))
 );
 ```
