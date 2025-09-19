@@ -10,6 +10,14 @@ Otro problema importante es la falta de un sistema que alerte sobre niveles bajo
 
 A esto se suma la falta de control de proveedores. Sin un registro adecuado de los proveedores y de sus condiciones de abastecimiento, se dificulta la gestión de compras, los tiempos de entrega y la negociación de precios. Esto puede derivar en retrasos en el reabastecimiento, sobrecostos o dependencia de un solo proveedor.
 
+# Diagrama UML
+![Diagrama de clases UML](https://github.com/user-attachments/assets/bf5f3867-785e-4afe-9e25-eec8285d739b)
+
+# Diagrama E-R
+![Diagramas_Miscelanea](https://github.com/user-attachments/assets/7bd00758-2e59-4fc4-8e53-d9bebc0236d5)
+
+# Código BDD
+
 ```sql
 --Creación de la bdd
 CREATE DATABASE IF NOT EXISTS miselanea;
@@ -115,4 +123,3 @@ CREATE TABLE `venta_producto` (
   KEY `producto_id` (`producto_id`)
 );
 ```
-![Diagrama de clases UML](https://github.com/user-attachments/assets/6f1ef586-55f8-487b-863c-f4a1321067f6)
