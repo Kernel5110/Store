@@ -16,6 +16,10 @@ A esto se suma la falta de control de proveedores. Sin un registro adecuado de l
 # Diagrama E-R
 ![Diagramas_Miscelanea](https://github.com/user-attachments/assets/7bd00758-2e59-4fc4-8e53-d9bebc0236d5)
 
+# Backup
+Enlace para descargar backup:
+https://drive.google.com/file/d/1ki-_EckIsRk5aXex7lx6EZYbmHjn5Vuc/view?usp=drive_link
+
 # Código BDD
 
 ```sql
@@ -171,3 +175,10 @@ CREATE TABLE `inventario` (
   CONSTRAINT `inventario_chk_1` CHECK ((`cantidad_actual` >= 0))
 );
 ```
+# IDE y JDK
+- Apache NetBeans IDE 25
+- jdk-21.0.8
+- Conexión a base de datos: mysql-connector-j-9.2.0
+
+Enlace para descargar IDE, JDK y MYSQL-CONNECTOR:
+https://drive.google.com/drive/folders/1t9Sn3lS6_sqzmcT5AN-d2BYu4zI_vfER?usp=sharing
